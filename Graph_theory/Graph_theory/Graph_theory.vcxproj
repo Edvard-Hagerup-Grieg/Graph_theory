@@ -115,9 +115,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="graph.h" />
     <ClInclude Include="hash.h" />
-    <ClInclude Include="table.h" />
+    <ClInclude Include="samples.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

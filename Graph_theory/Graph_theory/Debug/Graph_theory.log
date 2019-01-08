@@ -1,3 +1,6 @@
 ﻿  main.cpp
-  LINK : не найден или не выполнена сборка C:\Users\Franz\Desktop\GitHub\Graph_theory\Graph_theory\Debug\Graph_theory.exe при последней инкрементной компоновке; выполняется полная компоновка
+c:\users\franz\desktop\github\graph_theory\graph_theory\graph_theory\hash.h(123): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
+c:\users\franz\desktop\github\graph_theory\graph_theory\graph_theory\hash.h(370): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\franz\desktop\github\graph_theory\graph_theory\graph_theory\hash.h(436): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+c:\users\franz\desktop\github\graph_theory\graph_theory\graph_theory\hash.h(438): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
   Graph_theory.vcxproj -> C:\Users\Franz\Desktop\GitHub\Graph_theory\Graph_theory\Debug\Graph_theory.exe
