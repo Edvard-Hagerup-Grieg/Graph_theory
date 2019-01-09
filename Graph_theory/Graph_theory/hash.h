@@ -1,11 +1,12 @@
 #pragma once
 
-#include <random>
-#include <iostream>
-#include <string>
 #include <list> 
 #include <time.h>
 #include <math.h>
+#include <random>
+#include <string>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -40,13 +41,11 @@ private:
 public:
 	chainHashFunction() { a = 0, b = 0, m = 0; };
 	chainHashFunction(const int m) {
-		if		(m <= 10)		p = 11;
-		else if (m <= 100)		p = 101;
-		else if (m <= 1000)		p = 1009;
-		else if (m <= 10000)	p = 10007;
-		else if (m <= 100000)	p = 100003;
-		else if (m <= 1000000)	p = 1000003;
-		else cout << "n must be less then 1 000 001" << endl;
+		if		(m <= 1000)		p = 2003;
+		else if (m <= 10000)	p = 11003;
+		else if (m <= 100000)	p = 101009;
+		else if (m <= 1000000)	p = 1001003;
+		else cout << "Error: n must be less then 1,000,001" << endl;
 		this -> m = m;
 		a = rand() % p;
 		b = 1 + rand() % (p - 1);
@@ -96,13 +95,11 @@ private:
 public:
 	kIndependentHashFunction() { };
 	kIndependentHashFunction(const int m, int k) {
-		if (m <= 10)			p = 11;
-		else if (m <= 100)		p = 101;
-		else if (m <= 1000)		p = 1009;
-		else if (m <= 10000)	p = 10007;
-		else if (m <= 100000)	p = 100003;
-		else if (m <= 1000000)	p = 1000003;
-		else cout << "n must be less then 1 000 001" << endl;
+		if		(m <= 1000)		p = 2003;
+		else if (m <= 10000)	p = 11003;
+		else if (m <= 100000)	p = 101009;
+		else if (m <= 1000000)	p = 1001003;
+		else cout << "Error: n must be less then 1,000,001" << endl;
 		this->m = m;
 		this->k = k;
 		a = new int[k];
@@ -173,7 +170,7 @@ public:
 	bool Search(int key);
 };
 
-// [ÑUCKOO]
+// [CUCKOO]
 class cuckooHash
 {
 private:
@@ -188,7 +185,7 @@ public:
 	cuckooHash(const int m, int n, int k);
 
 	void Insert(int x, int num_table);
-	void Delete(int key, int num_table);
+	void Delete(int key);
 	void Print();
 	void Rehash();
 	bool Search(int key);
@@ -364,7 +361,7 @@ bool doubleHash::Search(int key)
 	return false;
 }
 
-// [ÑUCKOO]
+// [CUCKOO]
 cuckooHash::cuckooHash(const int m, int n, int k)
 {
 	limit = log(n);
@@ -427,15 +424,15 @@ void cuckooHash::Insert(int key, int num_table)
 	}
 }
 
-void cuckooHash::Delete(int key, int num_table)
+void cuckooHash::Delete(int key)
 {
 	int index1 = h1(key);
 	int index2 = h2(key);
 
 	if (table1[index1] == key)
-		table1[index1] == NULL;
+		table1[index1] = NULL;
 	else if (table2[index2] == key)
-		table2[index2] == NULL;
+		table2[index2] = NULL;
 	else
 		cout << "Error: The key is not found." << endl;
 }
