@@ -1,11 +1,13 @@
 import matplotlib.pyplot as plt
-import os
-import numpy as np
 from itertools import cycle
+import numpy as np
+import os
 
 
-path_to_files = "C:\\Users\\donte_000\\Downloads\\Telegram Desktop\\hash"
-path_to_img = "c:/Program Files/Mozilla Firefox/firefox.exe"
+method = "CHAIN" #"CUCKOO", "CHAIN","DOUBLE"
+path_to_files = "[PATH TO FOLDER]\\results"
+path_to_img = "[PATH TO FOLDER]\\figures"
+
 dict = {"CUCKOO" : [], "CHAIN" : [], "DOUBLE" : []}
 for root, dirs, files in os.walk(path_to_files):
     for file in files:
@@ -21,37 +23,36 @@ for root, dirs, files in os.walk(path_to_files):
             insert = float(data[1].split("\t")[1])
             delete = float(data[2].split("\t")[1])
             search = float(data[3].split("\t")[1])
-            #print(insert)
-            #if name == "CUCKOO":
             dict[name].append([insert, delete, search , n, m])
+
+
 cycol = cycle('bgrcmykw')
-name = "CHAIN"
-for meth in ["CHAIN" ]:#"CUCKOO", "CHAIN","DOUBLE"
+fig = plt.figure()
+ax = plt.gca()
+for meth in [method]:
     insert = []
     delete = []
     search = []
     N = []
     M = []
     for inf in dict[meth]:
-        if inf[3] == inf[4]:
+        if inf[4] == inf[3]:
             insert.append(inf[0])
             delete.append(inf[1])
             search.append(inf[2])
             N.append(inf[3])
             M.append(inf[4])
 
-    #plt.axes((0, 1000, 0, 0.001))
-    plt.semilogx(N, insert, color = np.random.random(3), alpha = 0.7)
-    plt.semilogx(N, delete, color = np.random.random(3), alpha = 0.7)
-    plt.semilogx(N, search, color = np.random.random(3), alpha = 0.7)
-#plt.title(name)
-plt.xlim(0, 1000)
-#plt.ylim(0,0.00001)
+    sz = 10
+    ax.scatter(N, insert, color = np.random.random(3), alpha = 0.7, s = sz)
+    ax.scatter(N, delete, color = np.random.random(3), alpha = 0.7, s = sz)
+    ax.scatter(N, search, color = np.random.random(3), alpha = 0.7, s = sz)
+
+#plt.title(method)
+ax.set_xscale('log')
+plt.ylim(0.0, 0.0005)
 plt.ylabel('time')
 plt.xlabel('N')
-#'CUCKOO_insert','CUCKOO_delete','CUCKOO_search','CHAIN_insert','CHAIN_delete','CHAIN_search','DOUBLE_insert','DOUBLE_delete','DOUBLE_search'
-plt.legend(['CHAIN_insert','CHAIN_delete','CHAIN_search'], loc='upper right')
+plt.legend([method+'_insert',method+'_delete',method+'_search'], loc='upper right')
 #plt.show()
-plt.savefig(name+"N==M"+".png")
-#plt.clf()
-
+plt.savefig(path_to_img+method+"_N==M"+".png")

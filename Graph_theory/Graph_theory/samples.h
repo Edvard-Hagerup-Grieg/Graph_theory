@@ -289,7 +289,7 @@ void TIME_sampleCUCKOO(int n, int k)
 	int index = 0;
 
 	// [RECORD]
-	int m = n;
+	int m = 2 * n;
 	int* a = new int[n + ITERATIONS];
 
 	for (int i = 0; i < n + ITERATIONS; i++)
